@@ -4,7 +4,7 @@ import * as React from "react";
 export interface IDefaultInputProps {
   label: string;
   placeholder: string;
-  value: string;
+  value: string | number;
   error?: string;
   smallMessage: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
