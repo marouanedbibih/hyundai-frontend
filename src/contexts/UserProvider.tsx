@@ -1,85 +1,62 @@
-"use client";
+import React, { createContext, useState, ReactNode, useContext } from "react";
+import { IUser, IUserRequest, UserRole } from "@/types/user"; // Assuming you have IUser and IUserRequest defined
 
-import React, { createContext, useState, ReactNode, useEffect, useContext } from "react";
-
-// Define the type for the user context state
+// Define the type for the context state
 interface UserContextProps {
-  // Token state
-  token: string | null;
-  setTokenInLocalStorage: (token: string) => void;
-  getTokenFromLocalStorage: () => string | null;
-  removeTokenFromLocalStorage: () => void;
-
-  // Role state
-  role: string | null;
-  setRoleInLocalStorage: (role: string) => void;
-  getRoleFromLocalStorage: () => string | null;
-  removeRoleFromLocalStorage: () => void;
-
+  data: IUser[] | null;
+  setData: (data: IUser[] | null) => void;
+  request: IUserRequest;
+  setRequest: (request: IUserRequest) => void;
+  initRequest: () => void;
+  searchKeyword: string;
+  setSearchKeyword: (searchKeyword: string) => void;
+  user: IUser | null;
+  setUser: (user: IUser | null) => void;
 }
 
 // Create the context
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 // Define the provider component
-const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(null);
-  const [role, setRole] = useState<string | null>(null);
+const UsersProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  // Data state
+  const [data, setData] = useState<IUser[] | null>(null);
 
-  // Token handlers
-  const setTokenInLocalStorage = (newToken: string) => {
-    setToken(newToken);
-    localStorage.setItem("token", newToken);
+  // Request state
+  const [request, setRequest] = useState<IUserRequest>({
+    username: "",
+    password: "",
+    name: "",
+    role: UserRole.SELLER, // default role or change as needed
+  });
+
+  const initRequest = () => {
+    setRequest({
+      username: "",
+      password: "",
+      name: "",
+      role: UserRole.SELLER, // Reset to default role or customize it as needed
+    });
   };
 
-  const getTokenFromLocalStorage = () => {
-    return localStorage.getItem("token");
-  };
+  // Search keyword state
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
 
-  const removeTokenFromLocalStorage = () => {
-    setToken(null);
-    localStorage.removeItem("token");
-  };
-
-  // Role handlers
-  const setRoleInLocalStorage = (newRole: string) => {
-    setRole(newRole);
-    localStorage.setItem("role", newRole);
-  };
-
-  const getRoleFromLocalStorage = () => {
-    return localStorage.getItem("role");
-  };
-
-  const removeRoleFromLocalStorage = () => {
-    setRole(null);
-    localStorage.removeItem("role");
-  };
-
-
-
-  // Load initial values from localStorage on component mount
-  useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    if (savedToken) setToken(savedToken);
-
-    const savedRole = localStorage.getItem("role");
-    if (savedRole) setRole(savedRole);
-
-  }, []);
+  // User state
+  const [user, setUser] = useState<IUser | null>(null);
 
   return (
     <UserContext.Provider
       value={{
-        token,
-        setTokenInLocalStorage,
-        getTokenFromLocalStorage,
-        removeTokenFromLocalStorage,
-        role,
-        setRoleInLocalStorage,
-        getRoleFromLocalStorage,
-        removeRoleFromLocalStorage,
-
+        data,
+        setData,
+        request,
+        setRequest,
+        initRequest,
+        searchKeyword,
+        setSearchKeyword,
+        user,
+        setUser,
       }}
     >
       {children}
@@ -87,13 +64,13 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
-// Custom hook to use the user context
+// Custom hook to use the context
 export const useUserContext = () => {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error("useUserContext must be used within a UserProvider");
+    throw new Error("useUserContext must be used within a UsersProvider");
   }
   return context;
 };
 
-export { UserProvider };
+export { UsersProvider };
