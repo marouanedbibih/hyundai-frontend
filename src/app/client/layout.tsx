@@ -3,7 +3,6 @@
 import { DefaultNavbar } from "@/components/Navbar/DefaultNavbar";
 import { SideBar } from "@/components/Sidebar/SideBar";
 import { ClientProvider } from "@/contexts/ClientProvider";
-import { useUserContext } from "@/contexts/UserProvider";
 import { Spinner } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import React from "react";

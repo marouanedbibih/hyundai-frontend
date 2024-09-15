@@ -2,12 +2,13 @@
 
 import { DefaultNavbar } from "@/components/Navbar/DefaultNavbar";
 import { SideBar } from "@/components/Sidebar/SideBar";
-import { VehicleProvider } from "@/contexts/VehicleProvider";
+import { ClientProvider } from "@/contexts/ClientProvider";
+import { UsersProvider } from "@/contexts/UserProvider";
 import { Spinner } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-export default function VehicleLayout({
+export default function UserLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode;
@@ -21,7 +22,7 @@ export default function VehicleLayout({
         <div className="mb-8 w-full">
           <DefaultNavbar />
         </div>
-        <VehicleProvider>{children}</VehicleProvider>
+        <UsersProvider>{children}</UsersProvider>
       </main>
     </div>
   );

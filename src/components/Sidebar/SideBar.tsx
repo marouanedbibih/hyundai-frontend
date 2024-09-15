@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
@@ -11,10 +12,11 @@ import {
 import {
   PresentationChartBarIcon,
   IdentificationIcon,
-  BuildingOfficeIcon,
   UserCircleIcon,
+  TruckIcon,
+  UsersIcon,
 } from "@heroicons/react/24/solid";
-import { useUserContext } from "@/contexts/UserProvider";
+import { useLocalStorageContext } from "@/contexts/LocalStorageProvider";
 
 interface SideBarProps {}
 
@@ -26,17 +28,24 @@ const menuItems = [
     role: ["ADMIN"],
   },
   {
+    title: "Users",
+    path: "/user",
+    icon: UsersIcon,
+    role: ["ADMIN"],
+  },
+  {
     title: "Client",
     path: "/client",
     icon: IdentificationIcon,
     role: ["ADMIN", "SECRETARY"],
   },
   {
-    title: "Departement",
-    path: "/departement",
-    icon: BuildingOfficeIcon,
+    title: "Vehicle",
+    path: "/vehicle",
+    icon: TruckIcon,
     role: ["ADMIN"],
   },
+
   {
     title: "Profile",
     path: "/profile",
@@ -50,7 +59,7 @@ export const SideBar: React.FC<SideBarProps> = () => {
   const router = useRouter();
 
   // Get the role from the global context
-  const { getRoleFromLocalStorage } = useUserContext();
+  const { getRoleFromLocalStorage } = useLocalStorageContext();
   const role = getRoleFromLocalStorage();
 
   // Filter menu items based on the user's role

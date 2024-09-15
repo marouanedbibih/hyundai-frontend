@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GlobalProvider } from "@/contexts/GlobalProvider";
-import { UserProvider } from "@/contexts/UserProvider";
+import { LocalStorageProvider } from "@/contexts/LocalStorageProvider";
 
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function RootLayout({
         
       >
         <GlobalProvider>
-          <UserProvider>{children}</UserProvider>
+          <LocalStorageProvider>{children}</LocalStorageProvider>
         </GlobalProvider>
       </body>
     </html>
