@@ -11,19 +11,17 @@ import {
 } from "@material-tailwind/react";
 import {
   ChevronDownIcon,
-  Cog6ToothIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
-import { useGlobalContext } from "@/contexts/GlobalProvider";
+import { useLocalStorageContext } from "@/contexts/LocalStorageProvider";
 
 // Profile menu component
 export function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const closeMenu = () => setIsMenuOpen(false);
-  const { removeRoleFromLocalStorage, removeTokenFromLocalStorage } =
-    useGlobalContext();
+  const { removeRoleFromLocalStorage, removeTokenFromLocalStorage } = useLocalStorageContext();
   const router = useRouter();
 
   const onSignOut = () => {
@@ -33,12 +31,6 @@ export function ProfileMenu() {
     removeTokenFromLocalStorage();
   };
 
-  const onEditProfile = () => {
-    closeMenu();
-    console.log("Navigate to profile editing page"); // Replace with actual navigation or logic
-    // You can navigate to the profile editing page if needed
-    // router.push("/profile/edit");
-  };
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">

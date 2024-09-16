@@ -10,9 +10,7 @@ import {
   ListItemPrefix,
 } from "@material-tailwind/react";
 import {
-  PresentationChartBarIcon,
   IdentificationIcon,
-  UserCircleIcon,
   TruckIcon,
   UsersIcon,
   BanknotesIcon,
@@ -23,12 +21,7 @@ import { useLocalStorageContext } from "@/contexts/LocalStorageProvider";
 interface SideBarProps {}
 
 const menuItems = [
-  {
-    title: "Dashboard",
-    path: "/dashboard",
-    icon: PresentationChartBarIcon,
-    role: ["ADMIN"],
-  },
+
   {
     title: "Users",
     path: "/user",
@@ -39,13 +32,13 @@ const menuItems = [
     title: "Client",
     path: "/client",
     icon: IdentificationIcon,
-    role: ["ADMIN", "SELLER"],
+    role: ["ADMIN", "SELLER","AFFTER_SALES_MANAGER"],
   },
   {
     title: "Vehicle",
     path: "/vehicle",
     icon: TruckIcon,
-    role: ["ADMIN"],
+    role: ["ADMIN", "SELLER","AFFTER_SALES_MANAGER"],
   },
   {
     title: "Sales",
@@ -57,14 +50,8 @@ const menuItems = [
     title: "Affter Sales",
     path: "/affter-sale",
     icon: WrenchScrewdriverIcon,
-    role: ["ADMIN", "AFFTER_SALE_MANAGER"],
-  },
-  {
-    title: "Profile",
-    path: "/profile",
-    icon: UserCircleIcon,
-    role: ["ADMIN", "SECRETARY", "EMPLOYEE"],
-  },
+    role: ["ADMIN", "AFFTER_SALES_MANAGER"],
+  }
 ];
 
 export const SideBar: React.FC<SideBarProps> = () => {
