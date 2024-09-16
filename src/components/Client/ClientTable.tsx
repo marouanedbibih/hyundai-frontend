@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 interface ClientTableProps {}
 
 const TABLE_HEAD = [
+  "ID",
   "First Name",
   "Last Name",
   "Email",
@@ -108,6 +109,9 @@ export const ClientTable: React.FC<ClientTableProps> = () => {
 
               return (
                 <tr key={client.id}>
+                  <td className={classes}>
+                    <SmallTextTable text={client.id.toString()} />
+                  </td>
                   <td className={classes}>
                     <SmallTextTable text={client.firstName} />
                   </td>

@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 interface VehicleTableProps {}
 
 const TABLE_HEAD = [
+  "ID",
   "Model",
   "Year",
   "Price",
@@ -124,6 +125,9 @@ export const VehicleTable: React.FC<VehicleTableProps> = () => {
 
               return (
                 <tr key={vehicle.id}>
+                  <td className={classes}>
+                    <SmallTextTable text={vehicle.id.toString()} />
+                  </td>
                   <td className={classes}>
                     <SmallTextTable text={vehicle.model} />
                   </td>

@@ -15,6 +15,7 @@ import {
   UserCircleIcon,
   TruckIcon,
   UsersIcon,
+  BanknotesIcon,
 } from "@heroicons/react/24/solid";
 import { useLocalStorageContext } from "@/contexts/LocalStorageProvider";
 
@@ -37,7 +38,7 @@ const menuItems = [
     title: "Client",
     path: "/client",
     icon: IdentificationIcon,
-    role: ["ADMIN", "SECRETARY"],
+    role: ["ADMIN", "SELLER"],
   },
   {
     title: "Vehicle",
@@ -45,7 +46,12 @@ const menuItems = [
     icon: TruckIcon,
     role: ["ADMIN"],
   },
-
+  {
+    title: "Sales",
+    path: "/sale",
+    icon: BanknotesIcon,
+    role: ["ADMIN", "SELLER"],
+  },
   {
     title: "Profile",
     path: "/profile",
