@@ -16,6 +16,7 @@ import {
   TruckIcon,
   UsersIcon,
   BanknotesIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
 import { useLocalStorageContext } from "@/contexts/LocalStorageProvider";
 
@@ -51,6 +52,12 @@ const menuItems = [
     path: "/sale",
     icon: BanknotesIcon,
     role: ["ADMIN", "SELLER"],
+  },
+  {
+    title: "Affter Sales",
+    path: "/affter-sale",
+    icon: WrenchScrewdriverIcon,
+    role: ["ADMIN", "AFFTER_SALE_MANAGER"],
   },
   {
     title: "Profile",
